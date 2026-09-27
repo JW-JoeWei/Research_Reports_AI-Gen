@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JW · 研究報告</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231c1d1f'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='%23fff' text-anchor='middle'%3EJW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --ink: #1c1d1f;
+    --ink-2: #55585e;
+    --ink-3: #8a8d93;
+    --line: #e4e2dc;
+    --accent: #1f5fbf;
+    --accent-soft: #e8f0fb;
+    --html: #1f7a4d;
+    --html-soft: #e6f4ec;
+    --pdf: #b4412b;
+    --pdf-soft: #fbece8;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans TC", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 56px 16px 64px; }
+
+  header .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 10px;
+  }
+  header h1 { font-size: 30px; line-height: 1.25; margin: 0 0 10px; font-weight: 700; }
+  header p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 36px 0 14px; }
+  .search {
+    flex: 1 1 240px; min-width: 0;
+    font: inherit; font-size: 15px;
+    padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface); color: var(--ink);
+  }
+  .search:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font: inherit; font-size: 13px; cursor: pointer;
+    padding: 5px 11px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+  .count { font-size: 13px; color: var(--ink-3); margin: 0 0 8px; }
+
+  ul.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  li.item { border-bottom: 1px solid var(--line); }
+  li.item a {
+    display: grid; grid-template-columns: 96px 1fr auto; gap: 4px 20px;
+    padding: 18px 8px; color: inherit; text-decoration: none; border-radius: 6px;
+  }
+  li.item a:hover { background: var(--surface); }
+  li.item a:hover .title { color: var(--accent); }
+  .date { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; color: var(--ink-3); padding-top: 3px; }
+  .title { font-size: 17px; font-weight: 700; margin: 0 0 4px; line-height: 1.4; }
+  .summary { margin: 0 0 8px; color: var(--ink-2); font-size: 14.5px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; color: var(--accent); background: var(--accent-soft); padding: 1px 8px; border-radius: 4px; }
+  .fmt {
+    align-self: start; margin-top: 2px;
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; font-weight: 500;
+    padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .fmt.html { color: var(--html); background: var(--html-soft); }
+  .fmt.pdf  { color: var(--pdf);  background: var(--pdf-soft); }
+  .empty { padding: 32px 8px; color: var(--ink-3); text-align: center; }
+
+  footer { margin-top: 48px; font-size: 13px; color: var(--ink-3); }
+  footer p { margin: 0 0 4px; }
+
+  @media (max-width: 600px) {
+    .wrap { padding-top: 36px; }
+    header h1 { font-size: 24px; }
+    li.item a { grid-template-columns: 1fr auto; padding: 16px 4px; }
+    .date { grid-column: 1 / -1; order: -1; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Research Notes</p>
+    <h1>JW · 研究報告</h1>
+    <p>全部內容由AI生成，僅供參考！</p>
+  </header>
+
+  <div class="tools">
+    <input class="search" id="q" type="search" placeholder="搜尋標題、摘要或標籤…" aria-label="搜尋報告">
+    <div class="chips" id="chips" role="group" aria-label="依標籤篩選"></div>
+  </div>
+  <p class="count" id="count"></p>
+  <ul class="list" id="list"></ul>
+
+  <footer>
+    <p id="updated"></p>
+  </footer>
+</div>
+
+<script>
+// ===== 報告清單：新增報告只要在最前面加一筆 =====
+const REPORTS = [
+  {
+    date: "2026-09-24",
+    title: "NVMe-CLI 功能與 SI 應用評估",
+    summary: "nvme-cli 能為 SI 工程師做什麼？功能總覽、SI 使用方法、業界標準、各廠牌相容性與 Pass/Fail 定義（基準 nvme-cli v3.1）。",
+    tags: ["SI", "工具評估", "NVMe"],
+    format: "pdf",
+    href: "reports/2026-09-24_nvme-cli-si/nvme-cli_SI_report.pdf"
+  },
+  {
+    date: "2026-09-24",
+    title: "OpenCode Go 模型選擇指南",
+    summary: "$10/月方案怎麼選模型：以每成功任務成本 × 困難任務解題率 × 額度，比較 32 個模型並給出建議設定。",
+    tags: ["AI 工具", "模型選型"],
+    format: "html",
+    href: "reports/2026-09-24_opencode-go-guide/"
+  },
+  {
+    date: "2026-09-02",
+    title: "IBM z17 高速連接器架構分析",
+    summary: "Telum II 模組上的 4 顆連接器到底接什麼？SMP-10 高速鏈路拓撲與架構解析，每個數字都附公開來源。",
+    tags: ["SI", "系統架構", "IBM z17"],
+    format: "html",
+    href: "reports/2026-09-02_ibm-z17-telum2-connectors/"
+  }
+];
+</script>
+<script>
+(function () {
+  const list = document.getElementById("list");
+  const q = document.getElementById("q");
+  const chipsEl = document.getElementById("chips");
+  const countEl = document.getElementById("count");
+  let activeTag = null;
+
+  const sorted = REPORTS.slice().sort((a, b) => b.date.localeCompare(a.date));
+  const tags = [...new Set(sorted.flatMap(r => r.tags))];
+
+  function chip(label, tag) {
+    const b = document.createElement("button");
+    b.className = "chip"; b.type = "button"; b.textContent = label;
+    b.setAttribute("aria-pressed", String(activeTag === tag));
+    b.onclick = () => { activeTag = activeTag === tag ? null : tag; renderChips(); render(); };
+    return b;
+  }
+  function renderChips() {
+    chipsEl.replaceChildren(chip("全部", null), ...tags.map(t => chip(t, t)));
+  }
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function render() {
+    const term = q.value.trim().toLowerCase();
+    const rows = sorted.filter(r =>
+      (!activeTag || r.tags.includes(activeTag)) &&
+      (!term || [r.title, r.summary, ...r.tags].join(" ").toLowerCase().includes(term))
+    );
+    list.replaceChildren(...rows.map(r => {
+      const li = el("li", "item");
+      const a = el("a");
+      a.href = r.href;
+      a.target = "_blank"; a.rel = "noopener";
+      const body = el("div");
+      body.append(el("p", "title", r.title), el("p", "summary", r.summary));
+      const tg = el("div", "tags");
+      r.tags.forEach(t => tg.append(el("span", "tag", t)));
+      body.append(tg);
+      a.append(el("span", "date", r.date), body, el("span", "fmt " + r.format, r.format.toUpperCase()));
+      li.append(a);
+      return li;
+    }));
+    if (!rows.length) list.append(el("li", "empty", "沒有符合的報告"));
+    countEl.textContent = `共 ${rows.length} 份報告`;
+  }
+
+  document.getElementById("updated").textContent = "最後更新：" + (sorted[0] ? sorted[0].date : "—");
+  q.addEventListener("input", render);
+  renderChips(); render();
+})();
+</script>
+</body>
+</html>
